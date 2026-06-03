@@ -1,6 +1,7 @@
 # RTT 기반 실내 측위: 제약 최적화 접근
 
-이윤재 · 12223645
+**학번**: 12223645  
+**이름**: 이윤재
 
 ---
 
@@ -201,4 +202,16 @@ Hold-out과 train의 평균 차이는 −6 %로 hold-out이 오히려 약간 더
 
 ## 5. Reference
 
-본 보고서의 알고리즘은 기존 논문을 직접 참조하지 않고 데이터 분석에서 도출된 관찰만으로 설계하였다. 제약 최적화와 SLSQP는 잘 알려진 수치 최적화 기법이고 Huber 손실과 반복적 가중치 갱신(IRLS)도 robust statistics의 표준 기법이지만, NLOS 측위에 부등식 제약을 hard constraint로 직접 박고 active set 정보를 잔차 기반 continuous weight로 반복적으로 활용하며 Huber 손실과 결합하는 본 접근은 특정 논문을 차용한 것이 아닌 본 과제의 데이터 특성에 맞춰 설계한 것이다.
+본 보고서의 알고리즘은 특정 NLOS 측위 논문을 직접 차용하지 않고 데이터 분석에서 도출된 관찰만으로 설계하였다. 다만 알고리즘 구성에 사용된 표준적인 수치 최적화 기법과 robust statistics 도구들은 다음 자료를 참고하였다.
+
+[1] Kraft, D. (1988). *A software package for sequential quadratic programming*. DFVLR-FB 88-28, Deutsche Forschungs- und Versuchsanstalt für Luft- und Raumfahrt, Köln, Germany. — SLSQP 알고리즘의 원 논문. 본 과제에서 비선형 부등식 제약 최적화 풀이에 사용.
+
+[2] Huber, P. J. (1964). *Robust estimation of a location parameter*. The Annals of Mathematical Statistics, 35(1), 73–101. — Huber 손실 함수의 정의와 robust 추정 이론.
+
+[3] Holland, P. W., & Welsch, R. E. (1977). *Robust regression using iteratively reweighted least-squares*. Communications in Statistics — Theory and Methods, 6(9), 813–827. — IRLS(Iteratively Reweighted Least Squares) 기법.
+
+[4] Boyd, S., & Vandenberghe, L. (2004). *Convex Optimization*. Cambridge University Press. — KKT 조건과 active set 분석의 표준 교과서.
+
+[5] Virtanen, P. et al. (2020). *SciPy 1.0: Fundamental algorithms for scientific computing in Python*. Nature Methods, 17, 261–272. — `scipy.optimize.minimize`의 SLSQP 구현 사용.
+
+NLOS 측위에 부등식 제약을 hard constraint로 직접 인코딩하고 KKT active set을 LOS 식별기로 해석하며 잔차 기반 continuous weight 갱신과 Huber 손실을 결합한 본 알고리즘의 구조는 위 표준 도구들을 본 과제의 데이터 특성에 맞춰 본인이 설계한 것이다.
